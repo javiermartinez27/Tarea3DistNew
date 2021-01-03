@@ -1,0 +1,21 @@
+syntax = "proto3";
+package chat;
+
+message Message {
+  string mensaje = 1;
+  repeated string consistenciaList = 2;
+}
+
+message Archivos {
+  bytes registro = 1;
+  bytes otroarchivo = 2;
+  bytes reloj = 3;
+  string nombre = 4;
+}
+
+service ChatService {
+  rpc RecibirDeAdmin(Message) returns (Message) {}
+  rpc Consistencia(Message) returns (Message) {}
+  rpc VueltaArchivos(Archivos) returns (Message) {}
+  rpc BuscaRegistro(Message) returns (Message) {}
+}

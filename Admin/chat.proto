@@ -1,0 +1,11 @@
+syntax = "proto3";
+package chat;
+
+message Message {
+  string mensaje = 1;
+}
+
+service ChatService {
+  rpc RecibirDeAdmin(Message) returns (Message) {}
+  rpc BuscaRegistro(Message) returns (Message) {}
+}
