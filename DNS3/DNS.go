@@ -13,7 +13,7 @@ func escuchar() {
 	puerto := "10.10.28.157:9003"
 	fmt.Println("DNS escuchando en el puerto " + puerto)
 
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", puerto))
+	lis, err := net.Listen("tcp", puerto)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
