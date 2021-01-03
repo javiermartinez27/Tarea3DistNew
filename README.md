@@ -23,3 +23,7 @@
 - DNS2: 10.10.28.156:9002
 - DNS3: 10.10.28.157:9003
 - Administradores y Clientes están en todas las máquinas.
+
+# PARA CORRER
+- Ir a la carpeta que se desea y ejecutar el comando `make`.
+- De preferencia, ejecutar primero los DNS2 y 3, y finalmente el 1. En otro caso, si se ejecuta primero el DNS1, los otros DNS se deben conectar en menos de 5 minutos, sino el DNS1 fallará al tratar de hacer la consistencia.
