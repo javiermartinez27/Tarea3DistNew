@@ -20,7 +20,7 @@ func escuchar() { //Funcion que permite al DNS recibir los comandos
 	puerto := "10.10.28.155:9001"
 	fmt.Println("DNS escuchando en el puerto " + puerto)
 
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", puerto))
+	lis, err := net.Listen("tcp", puerto)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
