@@ -17,8 +17,8 @@ import (
 )
 
 func escuchar() { //Funcion que permite al DNS recibir los comandos
-	puerto := 9001
-	fmt.Println("DNS escuchando en el puerto " + strconv.Itoa(puerto))
+	puerto := "10.10.28.155:9001"
+	fmt.Println("DNS escuchando en el puerto " + puerto)
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", puerto))
 	if err != nil {
@@ -307,10 +307,10 @@ func consistencia() {
 		time.Sleep(300 * time.Second)
 		var log1 []string
 		var log2 []string
-		log1 = connToDNS(":9002", "inicio") //Recibe el log del DNS2
-		log2 = connToDNS(":9003", "inicio") //Recibe el log del DNS3
-		actualizaLog(log1, 2)               //Actualiza el log de este DNS con la info del DNS2
-		actualizaLog(log2, 3)               //Actualiza el log de este DNS con la info del DNS2
+		log1 = connToDNS("10.10.28.156:9002", "inicio") //Recibe el log del DNS2
+		log2 = connToDNS("10.10.28.157:9003", "inicio") //Recibe el log del DNS3
+		actualizaLog(log1, 2)                           //Actualiza el log de este DNS con la info del DNS2
+		actualizaLog(log2, 3)                           //Actualiza el log de este DNS con la info del DNS2
 		//aqui se busca cada archivo
 		files, err := ioutil.ReadDir("logs")
 		if err != nil {
@@ -333,8 +333,8 @@ func consistencia() {
 			if err3 != nil {
 				log.Fatalln(err)
 			}
-			fmt.Println(connToDNS2(":9002", nombreSep2[1], registro, log1, reloj)) //envia los archivos como bytes al DNS2
-			fmt.Println(connToDNS2(":9003", nombreSep2[1], registro, log1, reloj)) //envia los archivos como bytes al DNS3
+			fmt.Println(connToDNS2("10.10.28.156:9002", nombreSep2[1], registro, log1, reloj)) //envia los archivos como bytes al DNS2
+			fmt.Println(connToDNS2("10.10.28.157:9003", nombreSep2[1], registro, log1, reloj)) //envia los archivos como bytes al DNS3
 		}
 	}
 }

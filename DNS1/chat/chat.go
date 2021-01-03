@@ -55,7 +55,7 @@ func leerReloj(registro string) string { //funcion encargada de leer el Reloj ac
 			log.Fatal(err)
 		}
 		return relojComoString
-	} else {
+	} else { //aqui no deberia entrar
 		return "Reloj no existe aun,"
 	}
 }
@@ -236,8 +236,11 @@ func (s *Server) RecibirDeBroker(ctx context.Context, in *Message) (*Message, er
 	var respuesta string
 	if separar[0] == "get" {
 		IpEncontrada := buscarIp(separar[1])
+		if IpEncontrada == "No encontrada" || IpEncontrada == "No se encontro la IP" {
+			return &Message{Mensaje: "No se encontró la IP"}, nil
+		}
 		reloj := leerReloj(separar[1])
-		ipDNS := "9001"
+		ipDNS := "10.10.28.155:9001"
 		respuesta = ipDNS + " " + reloj + " " + IpEncontrada
 		// fmt.Println("ESTO ES MENSAJE QUE SE ENVIA DNS1 TO BROKER")
 		fmt.Println(respuesta)

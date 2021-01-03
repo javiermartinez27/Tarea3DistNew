@@ -16,7 +16,7 @@ var consistencia [][]string
 
 func sendToBroker(accion string) string {
 	var conn *grpc.ClientConn
-	conn, err := grpc.Dial(":9000", grpc.WithInsecure())
+	conn, err := grpc.Dial("10.10.28.154:9000", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("No se logró conectar: %s", err)
 	}

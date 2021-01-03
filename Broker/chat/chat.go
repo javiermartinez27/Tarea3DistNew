@@ -17,15 +17,15 @@ func (s *Server) RecibirDeAdmin(ctx context.Context, in *Message) (*Message, err
 	log.Printf("Administrador solicita servidor DNS. Petición: %s", in.Mensaje)
 	if ipActual == 1 {
 		ipActual++
-		return &Message{Mensaje: ":9001"}, nil //10.10.28.155
+		return &Message{Mensaje: "10.10.28.155:9001"}, nil
 	} else if ipActual == 2 {
 		ipActual++
-		return &Message{Mensaje: ":9002"}, nil //10.10.28.156
+		return &Message{Mensaje: "10.10.28.156:9002"}, nil
 	} else {
 		ipActual = 1
-		return &Message{Mensaje: ":9003"}, nil //10.10.28.157
+		return &Message{Mensaje: "10.10.28.157:9003"}, nil //10.10.28.157
 	}
-	return &Message{Mensaje: "10.10.28.157"}, nil //No debería llegar aqui
+	return &Message{Mensaje: "10.10.28.157:9003"}, nil //No debería llegar aqui
 }
 
 func sendToDNS(comando string, ip string) string {
@@ -51,22 +51,22 @@ func (s *Server) RecibirDeCliente(ctx context.Context, in *Message) (*Message, e
 		ipActual++
 		fmt.Println("BROKER TO DNS1")
 		fmt.Println(in.Mensaje)
-		IpResponse := sendToDNS(in.Mensaje, ":9001")
+		IpResponse := sendToDNS(in.Mensaje, "10.10.28.155:9001")
 		return &Message{Mensaje: IpResponse}, nil //10.10.28.155
 	} else if ipActual == 2 {
 		ipActual++
 		fmt.Println("BROKER TO DNS2")
 		fmt.Println(in.Mensaje)
-		IpResponse := sendToDNS(in.Mensaje, ":9002")
+		IpResponse := sendToDNS(in.Mensaje, "10.10.28.156:9002")
 		return &Message{Mensaje: IpResponse}, nil //10.10.28.156
 	} else {
 		ipActual = 1
 		fmt.Println("BROKER TO DNS3")
 		fmt.Println(in.Mensaje)
-		IpResponse := sendToDNS(in.Mensaje, ":9003")
+		IpResponse := sendToDNS(in.Mensaje, "10.10.28.157:9003")
 		return &Message{Mensaje: IpResponse}, nil //10.10.28.157
 	}
-	return &Message{Mensaje: "10.10.28.157"}, nil //No debería llegar aqui
+	return &Message{Mensaje: "10.10.28.157:9003"}, nil //No debería llegar aqui
 
 }
 

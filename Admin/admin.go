@@ -42,7 +42,7 @@ func sendToDNS(puerto string, accion string, busca string) string {
 
 func sendAccion(accion string) string {
 	var conn *grpc.ClientConn
-	conn, err := grpc.Dial(":9000", grpc.WithInsecure())
+	conn, err := grpc.Dial("10.10.28.154:9000", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("No se logró conectar: %s", err)
 	}
@@ -87,11 +87,11 @@ func main() {
 			}
 			if encontrado == false { //se busca en los DNS
 				reloj2 := "no encontrado"
-				reloj2 = sendToDNS(":9001", comando, "busca")
+				reloj2 = sendToDNS("10.10.28.155:9001", comando, "busca")
 				if reloj2 == "no encontrado" {
-					reloj2 = sendToDNS(":9002", comando, "busca")
+					reloj2 = sendToDNS("10.10.28.156:9002", comando, "busca")
 					if reloj2 == "no encontrado" {
-						reloj2 = sendToDNS(":9003", comando, "busca")
+						reloj2 = sendToDNS("10.10.28.157:9003", comando, "busca")
 						if reloj2 == "no encontrado" {
 							fmt.Println("El registro no existe, puede crearlo usando 'create nombre.dominio IP'")
 						} else {

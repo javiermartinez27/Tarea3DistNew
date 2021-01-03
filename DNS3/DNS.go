@@ -4,15 +4,14 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"strconv"
 
 	"github.com/tutorialedge/go-grpc-tutorial/chat"
 	"google.golang.org/grpc"
 )
 
 func escuchar() {
-	puerto := 9003
-	fmt.Println("DNS escuchando en el puerto " + strconv.Itoa(puerto))
+	puerto := "10.10.28.157:9003"
+	fmt.Println("DNS escuchando en el puerto " + puerto)
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", puerto))
 	if err != nil {
