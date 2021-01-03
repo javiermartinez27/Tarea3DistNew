@@ -10,7 +10,7 @@ import (
 )
 
 func escuchar() {
-	puerto := "10.10.28.154;9000"
+	puerto := "10.10.28.154:9000"
 	fmt.Println("Broker escuchando en el puerto " + puerto)
 
 	lis, err := net.Listen("tcp", puerto)
