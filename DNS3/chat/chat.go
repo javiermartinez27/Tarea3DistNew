@@ -2,6 +2,7 @@ package chat
 
 import (
 	"bufio"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -42,6 +43,21 @@ func readLines(path string) ([]string, error) {
 		lines = append(lines, scanner.Text())
 	}
 	return lines, scanner.Err()
+}
+
+func leerReloj(registro string) string { //funcion encargada de leer el Reloj actual
+	registroSeparado := strings.Split(registro, ".")
+	nombre := "relojes/reloj_" + registroSeparado[1] + ".txt"
+	if _, err := os.Stat(nombre); err == nil { //actualiza el reloj
+		reloj, err := readLines(nombre)
+		relojComoString := strings.Join(reloj, " ")
+		if err != nil {
+			log.Fatal(err)
+		}
+		return relojComoString
+	} else {
+		return "Reloj no existe aun,"
+	}
 }
 
 func updateReloj(registro string) string {
@@ -171,6 +187,28 @@ func updateRegistro(registro string, cambio string) string {
 	return "encontrado"
 }
 
+func buscarIp(registro string) string { //Encargada de buscar la Ip solicitada
+	registroSeparado := strings.Split(registro, ".")
+	nombre := "registros_zf/registro_" + registroSeparado[1] + ".txt"
+	if _, err := os.Stat(nombre); err != nil {
+		return "No se encontro la IP"
+	}
+	input, err := ioutil.ReadFile(nombre)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	lines := strings.Split(string(input), "\n")
+
+	for i, line := range lines {
+		if strings.Contains(line, registro) {
+			lineaserapada := strings.Split(lines[i], " ")
+			return lineaserapada[3]
+		}
+	}
+	return "No encontrada"
+}
+
 func (s *Server) RecibirDeAdmin(ctx context.Context, in *Message) (*Message, error) { //cuando un admin envia una peticion
 	log.Printf("Administrador envía petición: %s", in.Mensaje)
 	separar := strings.Split(in.Mensaje, " ")
@@ -189,6 +227,22 @@ func (s *Server) RecibirDeAdmin(ctx context.Context, in *Message) (*Message, err
 		crearLog(separar[0], separar[1], "-")
 	}
 	return &Message{Mensaje: respuesta}, nil
+}
+
+func (s *Server) RecibirDeBroker(ctx context.Context, in *Message) (*Message, error) { //cuando un cliente envia una peticion
+	log.Printf("Cliente envia petición: %s", in.Mensaje)
+	separar := strings.Split(in.Mensaje, " ")
+	var respuesta string
+	if separar[0] == "get" {
+		IpEncontrada := buscarIp(separar[1])
+		reloj := leerReloj(separar[1])
+		ipDNS := "9003"
+		respuesta = ipDNS + " " + reloj + " " + IpEncontrada
+		// fmt.Println("ESTO ES MENSAJE QUE SE ENVIA DNS1 TO BROKER")
+		fmt.Println(respuesta)
+	}
+	return &Message{Mensaje: respuesta}, nil
+
 }
 
 func (s *Server) BuscaRegistro(ctx context.Context, in *Message) (*Message, error) { //cuando un admin envia una peticion
