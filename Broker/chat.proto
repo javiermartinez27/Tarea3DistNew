@@ -8,4 +8,5 @@ message Message {
 service ChatService {
   rpc RecibirDeAdmin(Message) returns (Message) {}
   rpc RecibirDeCliente(Message) returns (Message) {}
+  rpc RecibirDeBroker(Message) returns (Message) {}
 }

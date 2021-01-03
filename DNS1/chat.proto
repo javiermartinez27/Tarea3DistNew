@@ -18,4 +18,5 @@ service ChatService {
   rpc Consistencia(Message) returns (Message) {}
   rpc VueltaArchivos(Archivos) returns (Message) {}
   rpc BuscaRegistro(Message) returns (Message) {}
+  rpc RecibirDeBroker(Message) returns (Message) {}
 }

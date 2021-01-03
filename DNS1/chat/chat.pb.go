@@ -171,7 +171,7 @@ var file_chat_proto_rawDesc = []byte{
 	0x52, 0x0b, 0x6f, 0x74, 0x72, 0x6f, 0x61, 0x72, 0x63, 0x68, 0x69, 0x76, 0x6f, 0x12, 0x14, 0x0a,
 	0x05, 0x72, 0x65, 0x6c, 0x6f, 0x6a, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x05, 0x72, 0x65,
 	0x6c, 0x6f, 0x6a, 0x12, 0x16, 0x0a, 0x06, 0x6e, 0x6f, 0x6d, 0x62, 0x72, 0x65, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x06, 0x6e, 0x6f, 0x6d, 0x62, 0x72, 0x65, 0x32, 0xd3, 0x01, 0x0a, 0x0b,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x6e, 0x6f, 0x6d, 0x62, 0x72, 0x65, 0x32, 0x86, 0x02, 0x0a, 0x0b,
 	0x43, 0x68, 0x61, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x30, 0x0a, 0x0e, 0x52,
 	0x65, 0x63, 0x69, 0x62, 0x69, 0x72, 0x44, 0x65, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x0d, 0x2e,
 	0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x1a, 0x0d, 0x2e, 0x63,
@@ -185,7 +185,10 @@ var file_chat_proto_rawDesc = []byte{
 	0x12, 0x2f, 0x0a, 0x0d, 0x42, 0x75, 0x73, 0x63, 0x61, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72,
 	0x6f, 0x12, 0x0d, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
 	0x1a, 0x0d, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22,
-	0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x00, 0x12, 0x31, 0x0a, 0x0f, 0x52, 0x65, 0x63, 0x69, 0x62, 0x69, 0x72, 0x44, 0x65, 0x42, 0x72,
+	0x6f, 0x6b, 0x65, 0x72, 0x12, 0x0d, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x1a, 0x0d, 0x2e, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x22, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -210,12 +213,14 @@ var file_chat_proto_depIdxs = []int32{
 	0, // 1: chat.ChatService.Consistencia:input_type -> chat.Message
 	1, // 2: chat.ChatService.VueltaArchivos:input_type -> chat.Archivos
 	0, // 3: chat.ChatService.BuscaRegistro:input_type -> chat.Message
-	0, // 4: chat.ChatService.RecibirDeAdmin:output_type -> chat.Message
-	0, // 5: chat.ChatService.Consistencia:output_type -> chat.Message
-	0, // 6: chat.ChatService.VueltaArchivos:output_type -> chat.Message
-	0, // 7: chat.ChatService.BuscaRegistro:output_type -> chat.Message
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	0, // 4: chat.ChatService.RecibirDeBroker:input_type -> chat.Message
+	0, // 5: chat.ChatService.RecibirDeAdmin:output_type -> chat.Message
+	0, // 6: chat.ChatService.Consistencia:output_type -> chat.Message
+	0, // 7: chat.ChatService.VueltaArchivos:output_type -> chat.Message
+	0, // 8: chat.ChatService.BuscaRegistro:output_type -> chat.Message
+	0, // 9: chat.ChatService.RecibirDeBroker:output_type -> chat.Message
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -288,6 +293,7 @@ type ChatServiceClient interface {
 	Consistencia(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
 	VueltaArchivos(ctx context.Context, in *Archivos, opts ...grpc.CallOption) (*Message, error)
 	BuscaRegistro(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
+	RecibirDeBroker(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
 }
 
 type chatServiceClient struct {
@@ -334,12 +340,22 @@ func (c *chatServiceClient) BuscaRegistro(ctx context.Context, in *Message, opts
 	return out, nil
 }
 
+func (c *chatServiceClient) RecibirDeBroker(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error) {
+	out := new(Message)
+	err := c.cc.Invoke(ctx, "/chat.ChatService/RecibirDeBroker", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatServiceServer is the server API for ChatService service.
 type ChatServiceServer interface {
 	RecibirDeAdmin(context.Context, *Message) (*Message, error)
 	Consistencia(context.Context, *Message) (*Message, error)
 	VueltaArchivos(context.Context, *Archivos) (*Message, error)
 	BuscaRegistro(context.Context, *Message) (*Message, error)
+	RecibirDeBroker(context.Context, *Message) (*Message, error)
 }
 
 // UnimplementedChatServiceServer can be embedded to have forward compatible implementations.
@@ -357,6 +373,9 @@ func (*UnimplementedChatServiceServer) VueltaArchivos(context.Context, *Archivos
 }
 func (*UnimplementedChatServiceServer) BuscaRegistro(context.Context, *Message) (*Message, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BuscaRegistro not implemented")
+}
+func (*UnimplementedChatServiceServer) RecibirDeBroker(context.Context, *Message) (*Message, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecibirDeBroker not implemented")
 }
 
 func RegisterChatServiceServer(s *grpc.Server, srv ChatServiceServer) {
@@ -435,6 +454,24 @@ func _ChatService_BuscaRegistro_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ChatService_RecibirDeBroker_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Message)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServiceServer).RecibirDeBroker(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat.ChatService/RecibirDeBroker",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServiceServer).RecibirDeBroker(ctx, req.(*Message))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _ChatService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "chat.ChatService",
 	HandlerType: (*ChatServiceServer)(nil),
@@ -454,6 +491,10 @@ var _ChatService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BuscaRegistro",
 			Handler:    _ChatService_BuscaRegistro_Handler,
+		},
+		{
+			MethodName: "RecibirDeBroker",
+			Handler:    _ChatService_RecibirDeBroker_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
