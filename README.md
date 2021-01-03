@@ -14,3 +14,12 @@ Conexión entre admin y broker, luego admin y DNSs LOCAL
 # DNS
 
 - Crean todo lo que tengan que crear (registros ZF, logs y relojes) y hacen un merge cada 5 minutos (consistencia eventual hecha).
+
+# Cliente
+
+- El cliente se conecta al Broker si hace una petición `get nombre.dominio` y este le responde con el ip del DNS + Reloj + Ip solicitada
+- Un ejemplo seria `get test.cl` recibiendo como respuesta ["test.cl 9001 250,0,0 20.0.0.1"] y mostrandolo por consola.
+- Si se recibe `get test.cl` nuevamente se hara la peticion y actualizara la informacion correspondiente llevada en memoria.
+- Si se realiza otra solicitud `get google.cl` por ejemplo se realizara la peticion y si esta no existe ya en momeria simplemente se agregara a esta.
+- Consistencia "Monotonic Reads" realizada.
+- Si se ingresa `exit` mostrara por pantalla toda la informacion que de los dominios que a solicitado.
